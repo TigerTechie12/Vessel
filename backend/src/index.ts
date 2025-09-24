@@ -5,18 +5,5 @@ import cors from 'cors';
 const app=express()  
 
 app.use(cors())
-
-app.get('/generateMnemonic',(req,res)=>{
-const mnemonic=generateMnemonic()
-
-res.json({mnemonic})
-
-
-})
-app.get('/addWallet',(req,res)=>{
-const seed=mnemonicToSeedSync(mnemonic)
-
-})
-
-
+app.use(express.json())
 app.listen(3000)

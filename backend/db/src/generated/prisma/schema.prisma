@@ -15,18 +15,8 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
+  id       Int    @id @default(autoincrement())
+  email    String @unique
   name     String
   password String
-  secret   Secret?
-}
-
-model Secret {
-  id         Int    @id @default(autoincrement())
-  userId     Int    @unique
-  user       User   @relation(fields: [userId], references: [id])
-  mnemonic   String @unique
-  publickey  String @unique
-  privatekey String @unique
 }

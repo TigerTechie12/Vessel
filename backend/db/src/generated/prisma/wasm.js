@@ -99,14 +99,6 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password'
 };
 
-exports.Prisma.SecretScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  mnemonic: 'mnemonic',
-  publickey: 'publickey',
-  privatekey: 'privatekey'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -119,8 +111,7 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User',
-  Secret: 'Secret'
+  User: 'User'
 };
 /**
  * Create the Client
@@ -168,13 +159,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       Int     @id @default(autoincrement())\n  email    String  @unique\n  name     String\n  password String\n  secret   Secret?\n}\n\nmodel Secret {\n  id         Int    @id @default(autoincrement())\n  userId     Int    @unique\n  user       User   @relation(fields: [userId], references: [id])\n  mnemonic   String @unique\n  publickey  String @unique\n  privatekey String @unique\n}\n",
-  "inlineSchemaHash": "f9c7e5b8b0f25a0e53afd746cdd0aa95c525671aebc21e093dee87622932f98e",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       Int    @id @default(autoincrement())\n  email    String @unique\n  name     String\n  password String\n}\n",
+  "inlineSchemaHash": "3898152222af0ba12f1da253a2dff70f9a1dd97f51d6285cbaa3d5f9dd8facf6",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"secret\",\"kind\":\"object\",\"type\":\"Secret\",\"relationName\":\"SecretToUser\"}],\"dbName\":null},\"Secret\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SecretToUser\"},{\"name\":\"mnemonic\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"publickey\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"privatekey\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

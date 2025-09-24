@@ -127,14 +127,6 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password'
 };
 
-exports.Prisma.SecretScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  mnemonic: 'mnemonic',
-  publickey: 'publickey',
-  privatekey: 'privatekey'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -147,8 +139,7 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User',
-  Secret: 'Secret'
+  User: 'User'
 };
 
 /**
