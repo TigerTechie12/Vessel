@@ -1,4 +1,4 @@
-export function RecoveryButton(){
+export function Buttons(){
     return <div className="flex flex-row">
         <button className="m-2 pl-5 pr-5">
            <div className="flex flex-row">

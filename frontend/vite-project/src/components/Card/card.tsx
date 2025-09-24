@@ -22,6 +22,3 @@ export function Card(){
    {name}</button>
     </div>
 }
-function PhraseGenerate(){
-axios.get()
-}
