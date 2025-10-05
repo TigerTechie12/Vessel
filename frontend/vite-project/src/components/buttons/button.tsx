@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom"
 export function Buttons(){
+  const navigate=useNavigate()
     return <div className="flex flex-row">
         <button className="m-2 pl-5 pr-5">
            <div className="flex flex-row">
@@ -13,7 +15,9 @@ export function Buttons(){
            </div>
    
         </button>
-<button className="m-2 pl-5 pr-5">
+<button onClick={()=>{
+  navigate('/wallet')
+}} className="m-2 pl-5 pr-5">
 <div className="flex flex-row ">
 
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
