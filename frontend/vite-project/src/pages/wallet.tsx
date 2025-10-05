@@ -5,10 +5,15 @@ import {mnemonicToSeedSync} from 'bip39'
 import { derivePath } from "ed25519-hd-key";
 import { Keypair, PublicKey } from "@solana/web3.js";
 import nacl from 'tweetnacl'
+
+interface Wallet{
+  secret:Uint8Array;
+  publicKey:string;
+}
 export function Wallets(){
     const [value,setValue]=useState('')
 const [mnemonic,setMnemonic]=useState(localStorage.getItem('phrase'))
-const [wallet,setWallet]=useState([])
+const [wallet,setWallet]=useState<Wallet[]>([])
 const [clicksCount,setClicksCount]=useState(0)
 
 
@@ -20,15 +25,15 @@ const seed=useMemo(()=>{
 },[mnemonic])
 
 useEffect(()=>{
-let path=`m/44'/501'/${clicksCount}'/0'`
-
+let path=`m/44'/501'/${clicksCount-1}'/0'`
+if(!seed){return;}
     let derivedseed=derivePath(path,seed.toString("hex")).key
       let secret = nacl.sign.keyPair.fromSeed(derivedseed).secretKey;
  let publicKey=Keypair.fromSecretKey(secret).publicKey.toBase58()
-    let w=[secret,publicKey]
+    let w={secret,publicKey}
     let updateWallet=[...wallet,w]
          setWallet(updateWallet)
-},[clicksCount])
+},[clicksCount,seed])
 
 
   return <div>
@@ -41,12 +46,22 @@ let path=`m/44'/501'/${clicksCount}'/0'`
     : null
    }
 
-<div>Vault</div>
+<h2>Vault</h2>
+<ul>
+{
+wallet.map((w)=>(
+  <li key={w.publicKey}>
+    <p><strong>Public Key:</strong>{w.publicKey}</p>
+    <p><strong>Secret Key (Hex):</strong> {Buffer.from(w.secret).toString('hex')}</p>
+  </li>
+))
 
+}
 
+</ul>
   </div>
  
 }
 
 
- 
+  
