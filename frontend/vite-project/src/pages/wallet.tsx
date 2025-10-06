@@ -3,7 +3,7 @@ import {Header} from "../components/header/header"
 import  {InputBox} from  "../components/input/input"
 import {mnemonicToSeedSync} from 'bip39'
 import { derivePath } from "ed25519-hd-key";
-import { Keypair, PublicKey } from "@solana/web3.js";
+import { Keypair } from "@solana/web3.js";
 import nacl from 'tweetnacl'
 
 interface Wallet{
@@ -12,7 +12,7 @@ interface Wallet{
 }
 export function Wallets(){
     const [value,setValue]=useState('')
-const [mnemonic,setMnemonic]=useState(localStorage.getItem('phrase'))
+const [mnemonic]=useState(localStorage.getItem('phrase'))
 const [wallet,setWallet]=useState<Wallet[]>([])
 const [clicksCount,setClicksCount]=useState(0)
 

@@ -1,11 +1,11 @@
 import { useState,useEffect} from 'react'
-import nacl from 'tweetnacl'
-import {generateMnemonic,mnemonicToSeedSync} from 'bip39'
+
+import {generateMnemonic} from 'bip39'
 
 
 export function Card(){
-    const [name,setName]=useState(" Generate Recovery Phrase")
-    const [loading,setLoading]=useState(true)
+    const [name]=useState(" Generate Recovery Phrase")
+    const [loading]=useState(true)
    const [phrase,setPhrase]=useState('')
 useEffect(()=>{{
     if(phrase){
